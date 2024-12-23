@@ -19,11 +19,7 @@ import time
 import json
 import sys
 import os
-# Expand the '~' to the full path of the home directory
-csv_path = os.path.expanduser('~/csv')
-
-# Change directory to the expanded path
-os.chdir(csv_path)
+os.chdir('nana/csv/')
 
 def chaseDf():
     paths_to_chase_files = []
