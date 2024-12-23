@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'csv/**/*.csv'  # Trigger on .csv files in the csv directory
+      - '**/*.csv'  # Trigger on .csv files in the csv directory
 
 jobs:
   process-csv:
