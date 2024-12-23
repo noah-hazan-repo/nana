@@ -19,7 +19,13 @@ import time
 import json
 import sys
 import os
-os.chdir('csv')
+# Get the directory of the current script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Construct the path to the 'csv' directory
+csv_dir = os.path.join(script_dir, 'csv')
+
+os.chdir(csv_dir)
 
 def chaseDf():
     paths_to_chase_files = []
