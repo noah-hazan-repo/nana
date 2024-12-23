@@ -85,11 +85,11 @@ def banksDf():
     bofa_df = bofaDf()
     amex_df = amexDf()
     dfs = []
-    if chase_df:
+    if len(chase_df) > 0:
         dfs.append(chase_df)
-    if bofa_df:
+    if len(bofa_df) > 0:
         dfs.append(bofa_df)
-    if amex_df:
+    if len(amex_df) > 0:
         dfs.append(amex_df)
     df = pd.concat(dfs)
     df = df.rename(columns={'Date':'date', 'Description':'description', 'Category':'bank_category', 'Amount':'amount'})
