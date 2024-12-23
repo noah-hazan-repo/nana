@@ -74,7 +74,13 @@ def banksDf():
     chase_df = chaseDf()
     bofa_df = bofaDf()
     amex_df = amexDf()
-    dfs = [chase_df, bofa_df, amex_df]
+    dfs = []
+    if chase_df:
+        dfs.append(chase_df)
+    if bofa_df:
+        dfs.append(bofa_df)
+    if amex_df:
+        dfs.append(amex_df)
     df = pd.concat(dfs)
     df = df.rename(columns={'Date':'date', 'Description':'description', 'Category':'bank_category', 'Amount':'amount'})
     df.insert(loc = 0,column = 'dwh_insert_date',value = str(datetime.now()))
