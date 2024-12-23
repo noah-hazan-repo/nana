@@ -19,7 +19,7 @@ import time
 import json
 import sys
 import os
-os.chdir('nana/csv/')
+os.chdir('nana/nana/csv/')
 
 def chaseDf():
     paths_to_chase_files = []
