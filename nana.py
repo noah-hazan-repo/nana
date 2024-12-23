@@ -19,7 +19,7 @@ import time
 import json
 import sys
 import os
-os.chdir('~/csv/') # Change directory to location of all bank statements.
+os.chdir('csv/') # Change directory to location of all bank statements.
 
 def chaseDf():
     paths_to_chase_files = []
