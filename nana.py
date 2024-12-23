@@ -19,13 +19,11 @@ import time
 import json
 import sys
 import os
-# Get the directory of the current script
-script_dir = os.path.dirname(os.path.abspath(__file__))
+# Expand the '~' to the full path of the home directory
+csv_path = os.path.expanduser('~/csv/')
 
-# Construct the path to the 'csv' directory
-csv_dir = os.path.join(script_dir, 'csv')
-
-os.chdir(csv_dir)
+# Change directory to the expanded path
+os.chdir(csv_path)
 
 def chaseDf():
     paths_to_chase_files = []
