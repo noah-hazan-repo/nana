@@ -25,7 +25,10 @@ jobs:
         pip install pandas oauth2client sqlalchemy df2gspread pandasql gspread
 
     - name: Run nana.py
+      env:
+        CREDENTIALS_JSON: ${{ secrets.drive_nana_secret }}
       run: |
+        echo "$CREDENTIALS_JSON" > credentials.json
         python nana.py
       env:
         HOME: ${{ github.workspace }}
