@@ -19,7 +19,7 @@ import time
 import json
 import sys
 import os
-
+os.chdir('/Users/Noah.Hazan/Downloads/') # Change directory to location of all bank statements.
 
 def chaseDf():
     paths_to_chase_files = []
@@ -29,6 +29,7 @@ def chaseDf():
             paths_to_chase_files.append(file)
     for path in paths_to_chase_files:
         df = pd.read_csv(path)
+        
         if 'Details' in df.columns:
             df = df.drop(columns=['Details', 'Type', 'Balance', 'Check or Slip #'])
             df.rename(columns={'Posting Date':'Date'})
@@ -36,11 +37,8 @@ def chaseDf():
             df = df.drop(columns=['Post Date', 'Type', 'Memo'])
             df = df.rename(columns={'Transaction Date' : 'Date', 'Category':'bank_category'})
         chase_dfs.append(df)
-    if len(chase_dfs) > 0:
-        df = pd.concat(chase_dfs)
-        return df
-    else:
-        return None
+    df = pd.concat(chase_dfs)
+    return df
     
 def bofaDf():
     paths_to_bofa_files = []
@@ -54,11 +52,7 @@ def bofaDf():
         bofa_dfs.append(df)  
     df = pd.concat(bofa_dfs)
     df.insert(loc = 2,column = 'bank_category',value = 'None')
-    if len(bofa_dfs) > 0:
-        df = pd.concat(bofa_dfs)
-        return df
-    else:
-        return None
+    return df
 
 def amexDf():
     paths_to_amex_files = []
@@ -71,11 +65,7 @@ def amexDf():
         amex_dfs.append(df)  
     df = pd.concat(amex_dfs)
     df.insert(loc = 2,column = 'bank_category',value = 'None')
-    if len(amex_dfs) > 0:
-        df = pd.concat(amex_dfs)
-        return df
-    else:
-        return None
+    return df
 
 def banksDf(): 
     # Read statements and drop/rename columns to prepare for DataFrame union.
@@ -84,13 +74,7 @@ def banksDf():
     chase_df = chaseDf()
     bofa_df = bofaDf()
     amex_df = amexDf()
-    dfs = []
-    if chase_df is not None:
-        dfs.append(chase_df)
-    if bofa_df is not None:
-        dfs.append(bofa_df)
-    if amex_df is not None:
-        dfs.append(amex_df)
+    dfs = [chase_df, bofa_df, amex_df]
     df = pd.concat(dfs)
     df = df.rename(columns={'Date':'date', 'Description':'description', 'Category':'bank_category', 'Amount':'amount'})
     df.insert(loc = 0,column = 'dwh_insert_date',value = str(datetime.now()))
