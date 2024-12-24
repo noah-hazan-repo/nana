@@ -48,7 +48,7 @@ def bofaDf():
     for path in paths_to_bofa_files:
         df = pd.read_csv(path, skiprows = 6, on_bad_lines='skip')
         df = df.drop(columns=['Running Bal.'])
-        bofa_dfs.append(df)  
+        bofa_dfs.append(df)
     df = pd.concat(bofa_dfs)
     df.insert(loc = 2,column = 'bank_category',value = 'None')
     return df
@@ -74,13 +74,16 @@ def banksDf():
     bofa_df = bofaDf()
     amex_df = amexDf()
     dfs = [chase_df, bofa_df, amex_df]
-    df = pd.concat(dfs)
-    df = df.rename(columns={'Date':'date', 'Description':'description', 'Category':'bank_category', 'Amount':'amount'})
-    df.insert(loc = 0,column = 'dwh_insert_date',value = str(datetime.now()))
-    df = df.drop_duplicates()
-    df = df.dropna()
-    df['amount'] = df['amount'].astype('str').str.replace(',','').astype('float')
-    return df
+    if len(dfs) > 0:
+        df = pd.concat(dfs)
+        df = df.rename(columns={'Date':'date', 'Description':'description', 'Category':'bank_category', 'Amount':'amount'})
+        df.insert(loc = 0,column = 'dwh_insert_date',value = str(datetime.now()))
+        df = df.drop_duplicates()
+        df = df.dropna()
+        df['amount'] = df['amount'].astype('str').str.replace(',','').astype('float')
+        return df
+    else:
+        return None
 
 
     
