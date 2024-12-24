@@ -36,8 +36,11 @@ def chaseDf():
             df = df.drop(columns=['Post Date', 'Type', 'Memo'])
             df = df.rename(columns={'Transaction Date' : 'Date', 'Category':'bank_category'})
         chase_dfs.append(df)
-    df = pd.concat(chase_dfs)
-    return df
+    if len(chase_dfs) > 0:
+        df = pd.concat(chase_dfs)
+        return df
+    else:
+        return None
     
 def bofaDf():
     paths_to_bofa_files = []
@@ -49,9 +52,12 @@ def bofaDf():
         df = pd.read_csv(path, skiprows = 6, on_bad_lines='skip')
         df = df.drop(columns=['Running Bal.'])
         bofa_dfs.append(df)
-    df = pd.concat(bofa_dfs)
-    df.insert(loc = 2,column = 'bank_category',value = 'None')
-    return df
+    if len(bofa_dfs) > 0:
+        df = pd.concat(bofa_dfs)
+        df.insert(loc = 2,column = 'bank_category',value = 'None')
+        return df
+    else:
+        return None
 
 def amexDf():
     paths_to_amex_files = []
@@ -61,10 +67,13 @@ def amexDf():
             paths_to_amex_files.append(file)
     for path in paths_to_amex_files:
         df = pd.read_csv(path, on_bad_lines='skip')
-        amex_dfs.append(df)  
-    df = pd.concat(amex_dfs)
-    df.insert(loc = 2,column = 'bank_category',value = 'None')
-    return df
+        amex_dfs.append(df)
+    if len(amex_dfs) > 0:
+        df = pd.concat(amex_dfs)
+        df.insert(loc = 2,column = 'bank_category',value = 'None')
+        return df
+    else:
+        return None
 
 def banksDf(): 
     # Read statements and drop/rename columns to prepare for DataFrame union.
