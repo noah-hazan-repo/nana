@@ -88,7 +88,6 @@ def banksDf():
 
 def dfToSheets(df, sheet_name):
     # Hard coding the values for now.
-    os.chdir('/Users/Noah.Hazan/Downloads/')
     scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
     creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
     gc = gspread.authorize(creds)
