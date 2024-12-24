@@ -7,8 +7,9 @@ Select all files at once.
 
 ![image](https://github.com/user-attachments/assets/cbe47a4e-1261-4a04-a028-16f399ed9523)
 
-
 Commit them to main.
+![image](https://github.com/user-attachments/assets/ebdc3617-dc97-4b96-a209-0ab040041c1e)
+
 
 Step 2 - Navigate to https://lookerstudio.google.com/u/0/reporting/8d12b6df-7b69-4e95-8300-71a3c8291922/page/BohsC
 
