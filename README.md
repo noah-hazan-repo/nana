@@ -3,7 +3,10 @@ Nana is Hebrew for Mint. This repo contains code within which I am emulating Int
 
 # Instructions
 Step 1 - Upload all csv banking files. Bank of America, Chase, and AMEX are the only supported statements.
-(This will trigger the pipeline on each upload. It fully overwrites, so continue uploading until all are submitted.)
+Select all files at once.
+
+![image](https://github.com/user-attachments/assets/cbe47a4e-1261-4a04-a028-16f399ed9523)
+
 
 Commit them to main.
 
