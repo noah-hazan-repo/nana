@@ -30,5 +30,3 @@ jobs:
       run: |
         echo "$CREDENTIALS_JSON" > credentials.json
         python nana.py
-      env:
-        HOME: ${{ github.workspace }}
