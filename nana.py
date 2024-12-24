@@ -102,8 +102,8 @@ def dfToSheets(df, sheet_name):
     # Hard coding the values for now.
     scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
     credentials_json = os.getenv('CREDENTIALS_JSON')
-    creds = json.loads(credentials_json)
-    # creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
+    # Authenticate using the credentials
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(credentials_json, scope)
     gc = gspread.authorize(creds)
     worksheet = gc.open('MINT_2.0').worksheet(f'{sheet_name}')
     if sheet_name == 'Sheet1':
