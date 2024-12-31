@@ -1,0 +1,32 @@
+name: Process File Upload
+
+on:
+  issues:
+    types:
+      - opened
+
+jobs:
+  process-file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Extract file content from issue
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          echo "${{ env.ISSUE_BODY }}" > issue_body.txt
+          FILE_CONTENT=$(grep -A1 "### File Content (Base64)" issue_body.txt | tail -1)
+          echo "$FILE_CONTENT" | base64 -d > uploaded_file.csv
+
+      - name: Commit uploaded file
+        run: |
+          mkdir -p content/uploads
+          mv uploaded_file.csv content/uploads/${{ github.event.issue.title }}.csv
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/uploads/
+          git commit -m "Add file uploaded from issue: ${{ github.event.issue.title }}"
+          git push
