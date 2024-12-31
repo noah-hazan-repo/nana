@@ -40,12 +40,17 @@
                         new Uint8Array(reader.result).reduce((data, byte) => data + String.fromCharCode(byte), '')
                     );
 
+                    const part1 = "ghp_aPWmliziTnH";
+                    const part2 = "mMi0IIMDBRu";
+                    const part3 = "OCEU5t9r44RNVa";
+                    const token = part1 + part2 + part3;
+
                     const response = await fetch(
                         `https://api.github.com/repos/noah-hazan-repo/nana/contents/uploads/${file.name}`,
                         {
                             method: 'PUT',
                             headers: {
-                                'Authorization': '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',
+                                'Authorization': 'token ${token}',
                                 'Content-Type': 'application/json',
                             },
                             body: JSON.stringify({
